@@ -22,24 +22,17 @@ class NaryNode:
         return result
 
     def traverse_preorder(self):
-        def rec(node, result):
-            result.append(node.value)
-            for child in node.children:
-                rec(child, result)
-
-        r = []
-        rec(self, r)
-        return r
+        result = [self]
+        for child in self.children:
+            result += child.traverse_preorder()
+        return result
 
     def traverse_postorder(self):
-        def rec(node, result):
-            for child in node.children:
-                rec(child, result)
-            result.append(node.value)
-
-        r = []
-        rec(self, r)
-        return r
+        result = []
+        for child in self.children:
+            result += child.traverse_postorder()
+        result.append(self)
+        return result
 
     def traverse_breadth_first(self):
         result = []

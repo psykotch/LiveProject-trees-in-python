@@ -42,43 +42,31 @@ class BinaryNode:
         """
 
     def traverse_preorder(self):
+        result = [self]
+        if self.left_child is not None:
+            result += self.left_child.traverse_preorder()
+        if self.right_child is not None:
+            result += self.right_child.traverse_postorder()
+        result result
 
-        def rec(node, result):
-            result.append(node.value)
-            if node.left_child is not None:
-                rec(node.left_child, result)
-            if node.right_child is not None:
-                rec(node.right_child, result)
-
-        r = []
-        rec(self, r)
-        return r
-
+        
     def traverse_inorder(self):
-
-        def rec(node, result):
-            if node.left_child is not None:
-                rec(node.left_child, result)
-            result.append(node.value)
-            if node.right_child is not None:
-                rec(node.right_child, result)
-
-        r = []
-        rec(self, r)
-        return r
+        result = []
+        if self.left_child is not None:
+            result += self.left_child.traverse_inorder()
+        result.append(self)
+        if self.right_child is not None:
+            result += self.right_child.traverse_inorder()
+        return result
 
     def traverse_postorder(self):
-
-        def rec(node, result):
-            if node.left_child is not None:
-                rec(node.left_child, result)
-            if node.right_child is not None:
-                rec(node.right_child, result)
-            result.append(node.value)
-
-        r = []
-        rec(self, r)
-        return r
+        result = []
+        if self.left_child is not None:
+            result += self.left_child.traverse_postorder()
+        if self.right_child is not None:
+            result += self.right_child.traverse_postorder()
+        result.append(self)
+        return result
 
     def traverse_breadth_first(self):
         queue = [self]
