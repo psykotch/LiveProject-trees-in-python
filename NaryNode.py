@@ -21,6 +21,35 @@ class NaryNode:
             result += self.children[i].__str__(level + 1)
         return result
 
+    def traverse_preorder(self):
+        def rec(node, result):
+            result.append(node.value)
+            for child in node.children:
+                rec(child, result)
+
+        r = []
+        rec(self, r)
+        return r
+
+    def traverse_postorder(self):
+        def rec(node, result):
+            for child in node.children:
+                rec(child, result)
+            result.append(node.value)
+
+        r = []
+        rec(self, r)
+        return r
+
+    def traverse_breadth_first(self):
+        result = []
+        queue = [self]
+        while queue:
+            node = queue.pop(0)
+            for child in node.children:
+                queue.append(child)
+            result.append(node.value)
+        return result
 
 def find_node(node, value):
     if node is None:
